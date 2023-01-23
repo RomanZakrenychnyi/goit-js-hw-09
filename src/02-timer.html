@@ -4,32 +4,81 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Countdown timer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://npmcdn.com/flatpickr/dist/themes/dark.css"
+    />
+
     <link rel="stylesheet" href="css/common.css" />
   </head>
   <body>
     <p><a href="index.html">Go back</a></p>
 
-    <input type="text" id="datetime-picker" />
-    <button type="button" data-start>Start</button>
+    <div style="text-align: center; margin-top: 160px; margin-bottom: 60px">
+      <input
+        type="text"
+        style="padding: 3px 20px; font-size: 16px; border-radius: 6px"
+        id="datetime-picker"
+      />
+      <button
+        type="button"
+        style="padding: 3px 20px; font-size: 16px; border-radius: 6px"
+        data-start
+      >
+        Start
+      </button>
+    </div>
 
-    <div class="timer">
-      <div class="field">
+    <div
+      class="timer"
+      style="text-align: center; display: flex; justify-content: space-evenly"
+    >
+      <div class="field" style="font-size: 30px; font-weight: 600">
         <span class="value" data-days>00</span>
-        <span class="label">Days</span>
+        <span
+          class="label"
+          style="display: block; font-size: 14px; font-weight: 300"
+          >Days</span
+        >
       </div>
-      <div class="field">
+      <div class="field" style="font-size: 30px; font-weight: 600">
         <span class="value" data-hours>00</span>
-        <span class="label">Hours</span>
+        <span
+          class="label"
+          style="display: block; font-size: 14px; font-weight: 300"
+          >Hours</span
+        >
       </div>
-      <div class="field">
+      <div class="field" style="font-size: 30px; font-weight: 600">
         <span class="value" data-minutes>00</span>
-        <span class="label">Minutes</span>
+        <span
+          class="label"
+          style="display: block; font-size: 14px; font-weight: 300"
+          >Minutes</span
+        >
       </div>
-      <div class="field">
+      <div class="field" style="font-size: 30px; font-weight: 600">
         <span class="value" data-seconds>00</span>
-        <span class="label">Seconds</span>
+        <span
+          class="label"
+          style="display: block; font-size: 14px; font-weight: 300"
+          >Seconds</span
+        >
       </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <script src="js/02-timer.js" type="module"></script>
   </body>
