@@ -60,7 +60,6 @@ function onStart() {
     btnStart.disabled = true;
     const convertT = convertMs(countdown)
 
-    console.log(convertT);
     updateTimerFace(convertT);
 
     if (convertT.days === 0 && convertT.hours === 0 && convertT.minutes === 0 && convertT.seconds === 0) {
