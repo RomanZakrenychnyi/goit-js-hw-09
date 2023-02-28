@@ -68,7 +68,7 @@ function onStart() {
         }
     }, 1000)
 };
-// sada
+
 function updateTimerFace({ days, hours, minutes, seconds }) {
   document.querySelector('[data-days]').textContent = pad(days);
   document.querySelector('[data-hours]').textContent = pad(hours);
