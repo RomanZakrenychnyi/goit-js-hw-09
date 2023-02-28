@@ -14,24 +14,8 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
 
-  onStart() {
-    const chosenDate = fp.selectedDates[0]    
-    
-    timerId = setInterval(() => {
-        const startTime = new Date();
-        const countdown = chosenDate - startTime;
-        btnStart.disabled = true;
-
-        updateTimerFace(convertMs(countdown));
-        
-        if (countdown < 0) {
-            clearInterval(timerId);
-        }
-    }, 1000)
-},
-  
   onClose(selectedDates) {
-      const todaysDate = new Date();
+      const todaysDate = Date.now();
 
       if (selectedDates[0] - todaysDate > 0) {
         btnStart.disabled = false;
@@ -42,9 +26,16 @@ const options = {
               width: '400px',
           });
       }
-  },
-  
-  convertMs(ms) {
+  }, 
+};
+
+
+function pad(value) {
+  return `${value}`.padStart(2, 0);
+};
+
+
+function convertMs(ms) {
   const second = 1000;
   const minute = second * 60;
   const hour = minute * 60;
@@ -56,33 +47,34 @@ const options = {
   const seconds = Math.floor((((ms % day) % hour) % minute) / second);
 
   return { days, hours, minutes, seconds };
-  },
-  
-  convertMs(ms) {
-  const second = 1000;
-  const minute = second * 60;
-  const hour = minute * 60;
-  const day = hour * 24;
+};
 
-  const days = Math.floor(ms / day);
-  const hours = Math.floor((ms % day) / hour);
-  const minutes = Math.floor(((ms % day) % hour) / minute);
-  const seconds = Math.floor((((ms % day) % hour) % minute) / second);
 
-  return { days, hours, minutes, seconds };
-  },
+function onStart() {
+    const chosenDate = fp.selectedDates[0]
+     
 
-  updateTimerFace({ days, hours, minutes, seconds }) {
+    timerId = setInterval(() => {
+        const startTime = Date.now();
+        const countdown = chosenDate - startTime;
+        btnStart.disabled = true;
+        const convertT = convertMs(countdown)
+
+        console.log(convertT);
+        updateTimerFace(convertT);
+
+        if (convertT.days === 0 && convertT.hours === 0 && convertT.minutes === 0 && convertT.seconds === 0) {
+            clearInterval(timerId);
+        }
+    }, 1000)
+};
+
+function updateTimerFace({ days, hours, minutes, seconds }) {
   document.querySelector('[data-days]').textContent = pad(days);
   document.querySelector('[data-hours]').textContent = pad(hours);
   document.querySelector('[data-minutes]').textContent = pad(minutes);
   document.querySelector('[data-seconds]').textContent = pad(seconds);
-  },
-  
-  pad(value) {
-  return `${value}`.padStart(2, 0);
-  },
-
 };
+
 
 const fp = flatpickr("#datetime-picker", options);
