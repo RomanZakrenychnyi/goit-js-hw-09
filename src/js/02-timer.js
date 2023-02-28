@@ -1,18 +1,12 @@
 import flatpickr from "flatpickr";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-const refs = {
-    btnStart: document.querySelector('button'),
-    timerDays: document.querySelector('[data-days]'),
-    timerHours: document.querySelector('[data-hours]'),
-    timerMinutes: document.querySelector('[data-minutes]'),
-    timerSeconds: document.querySelector('[data-seconds]')
-}
+const btnStart = document.querySelector('button');
 
-refs.btnStart.disabled = true;
+btnStart.disabled = true;
 let timerId = null;
 
-refs.btnStart.addEventListener('click', onTimerStart);
+btnStart.addEventListener('click', onTimerStart);
 
 const options = {
   enableTime: true,
@@ -24,9 +18,9 @@ const options = {
       const todaysDate = new Date();
 
       if (selectedDates[0] - todaysDate > 0) {
-        refs.btnStart.disabled = false;
+        btnStart.disabled = false;
       } else {
-          refs.btnStart.disabled = true;
+          btnStart.disabled = true;
           Notify.failure('Please choose a date in the future', {
               timeout: 1500,
               width: '400px',
@@ -35,8 +29,8 @@ const options = {
     },
 };
 
-function addLeadingZero(value) {
-  return String(value).padStart(2, 0);
+function pad(value) {
+  return `${value}`.padStart(2, 0);
 }
 
 function convertMs(ms) {
@@ -59,7 +53,7 @@ function onTimerStart() {
     timerId = setInterval(() => {
         const startTime = new Date();
         const countdown = chosenDate - startTime;
-        refs.btnStart.disabled = true;
+        btnStart.disabled = true;
 
         updateTimerFace(convertMs(countdown));
         
@@ -70,10 +64,10 @@ function onTimerStart() {
 }
 
 function updateTimerFace({ days, hours, minutes, seconds }) {
-  refs.timerDays.textContent = addLeadingZero(days);
-  refs.timerHours.textContent = addLeadingZero(hours);
-  refs.timerMinutes.textContent = addLeadingZero(minutes);
-  refs.timerSeconds.textContent = addLeadingZero(seconds);
+  document.querySelector('[data-days]').textContent = pad(days);
+  document.querySelector('[data-hours]').textContent = pad(hours);
+  document.querySelector('[data-minutes]').textContent = pad(minutes);
+  document.querySelector('[data-seconds]').textContent = pad(seconds);
 }
 
 const fp = flatpickr("#datetime-picker", options);
